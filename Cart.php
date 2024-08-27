@@ -23,7 +23,6 @@ class Cart extends BaseModel {
     }
     public function getAll($user_id = null) {
         if ($user_id) {
-            // Fetch cart items for a specific user
             $query = "SELECT c.id as cart_id, c.quantity as cart_quantity, 
                              p.id as product_id, p.title, p.description, p.quantity as product_quantity, p.image 
                       FROM " . $this->table_name . " c
@@ -33,7 +32,6 @@ class Cart extends BaseModel {
             $stmt = $this->db->prepare($query);
             $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         } else {
-            // Fetch all cart items (for all users)
             $query = "SELECT c.id as cart_id, c.quantity as cart_quantity, 
                              p.id as product_id, p.title, p.description, p.quantity as product_quantity, p.image, 
                              u.id as user_id, u.username 
